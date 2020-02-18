@@ -1,0 +1,13 @@
+{
+	"name": "aboutus",
+	"endpoint": "https://staging.muve.lk/driver/v2",
+	"request format": "get",
+	"security headers": [{
+		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	}],
+	"parameters": [{
+		"language_id" : "1",
+		"username" : "abc",
+		"password" : "abc"
+	}]
+}
