@@ -3,6 +3,8 @@ package com.company;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import org.json.*;
+
 
 public class Main {
 
@@ -24,7 +26,14 @@ public class Main {
             } finally {
                 reader.close();
             }
-            System.out.print(jsonStr);
+            JSONArray jsonArr = new JSONArray(jsonStr);
+
+            for (int i = 0; i < jsonArr.length(); i++)
+            {
+                JSONObject jsonObj = jsonArr.getJSONObject(i);
+
+                System.out.println(jsonObj);
+            }
         }
     }
 
