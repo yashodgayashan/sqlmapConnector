@@ -172,6 +172,15 @@ public class Main {
             }
             return getEndpoint()+endString;
         }
+
+        public boolean hasFormParameters() {
+            if (getFormParameters().size() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
     }
 
 
