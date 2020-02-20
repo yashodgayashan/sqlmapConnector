@@ -188,6 +188,14 @@ public class Main {
                 return false;
             }
         }
+
+        public Queue<String> getFormParamsKeys() {
+            Queue<String> pathParams = new LinkedList<>();
+            getFormParameters().forEach((key, value) ->{
+                pathParams.add(key);
+            });
+            return pathParams;
+        }
     }
 
 
