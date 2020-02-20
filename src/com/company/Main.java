@@ -9,9 +9,8 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-           String fileData = getFileContent("text.txt");
-
-            JSONArray jsonArr = new JSONArray(fileData);
+            String fileData = getFileContent("text.txt");
+            JSONArray jsonArr = convertToJsonArray(fileData);
 
             for (int i = 0; i < jsonArr.length(); i++)
             {
@@ -85,6 +84,10 @@ public class Main {
                 reader.close();
             }
             return data;
+        }
+
+        public static JSONArray convertToJsonArray(String data) {
+            return new JSONArray(data);
         }
 
     }
