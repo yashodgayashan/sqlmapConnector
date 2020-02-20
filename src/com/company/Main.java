@@ -1,8 +1,9 @@
 package com.company;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
+
 import org.json.*;
 
 
@@ -16,6 +17,9 @@ public class Main {
             for (int i = 0; i < jsonArr.length(); i++)
             {
                 Endpoint endpoint = getEndpointElements(jsonArr.getJSONObject(i));
+                System.out.println(endpoint.getName());
+                System.out.println(endpoint.getConstructedEndpoint());
+                System.out.println();
             }
         }
 
@@ -50,7 +54,7 @@ public class Main {
             String method = null;
             String name = null;
             HashMap<String, String > formParameters = new HashMap<>();
-            HashMap<String, String > pathParameters = new HashMap<>();
+            LinkedHashMap<String, String > pathParameters = new LinkedHashMap<>();
             HashMap<String, String> headers = new HashMap<>();
             String key;
             while (keys.hasNext()){
@@ -120,10 +124,10 @@ public class Main {
         String method;
         String name;
         HashMap<String, String > formParameters = new HashMap<>();
-        HashMap<String, String > pathParameters = new HashMap<>();
+        LinkedHashMap<String, String > pathParameters = new LinkedHashMap<>();
         HashMap<String, String> headers = new HashMap<>();
 
-        Endpoint(String endpoint, String method, String name, HashMap<String, String > headers, HashMap<String, String > formParameters, HashMap<String, String > pathParameters) {
+        Endpoint(String endpoint, String method, String name, HashMap<String, String > headers, HashMap<String, String > formParameters, LinkedHashMap<String, String > pathParameters) {
 
             this.endpoint = endpoint;
             this.method = method;
@@ -156,6 +160,17 @@ public class Main {
         public HashMap<String, String> getPathParameters() {
             return pathParameters;
         }
+
+        public String getConstructedEndpoint() {
+            String endString = "Hi";
+            LinkedList<String> pathParams = new LinkedList<String>();
+            getPathParameters().forEach((key,value)->{
+                pathParams.add(value);
+            });
+            System.out.println(pathParams.size());
+            return endString;
+        }
+
     }
 
 
