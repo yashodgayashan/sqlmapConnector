@@ -181,6 +181,13 @@ public class Main {
             }
         }
 
+        public boolean hasHeader() {
+            if (getHeaders().size() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
 
