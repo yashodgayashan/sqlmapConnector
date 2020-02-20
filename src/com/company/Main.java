@@ -1,50 +1,22 @@
 package com.company;
 
 import java.io.*;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Set;
-
 import org.json.*;
 
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+        public static void main(String[] args) throws IOException {
 
             String fileData = getFileContent("text.txt");
             JSONArray jsonArr = convertToJsonArray(fileData);
 
             for (int i = 0; i < jsonArr.length(); i++)
             {
-                constructURLElements(jsonArr.getJSONObject(i));
-
+                Endpoint endpoint = getEndpointElements(jsonArr.getJSONObject(i));
             }
-//
-//        ProcessBuilder processBuilder = new ProcessBuilder();
-//
-//        processBuilder.command("sqlmap", "-u", "http://www.bible-history.com/subcat.php?id=2","--dbs");
-//
-//        try {
-//
-//            Process process = processBuilder.start();
-//
-//            BufferedReader readerTwo =
-//                    new BufferedReader(new InputStreamReader(process.getInputStream()));
-//
-//            String line;
-//            while ((line = readerTwo.readLine()) != null) {
-//                System.out.println(line);
-//            }
-//
-//            int exitCode = process.waitFor();
-//            System.out.println("\nExited with error code : " + exitCode);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-
         }
 
         public static String getFileContent(String fileName) throws IOException {
@@ -71,41 +43,94 @@ public class Main {
             return new JSONArray(data);
         }
 
-        public static void constructURLElements(JSONObject jsonObj){
+        public static Endpoint getEndpointElements(JSONObject jsonObj){
+
             Iterator<String> keys = jsonObj.keys();
+            String endpoint = null;
+            String method = null;
+            String name = null;
+            HashMap<String, String > formParameters = new HashMap<>();
+            HashMap<String, String > pathParameters = new HashMap<>();
+            HashMap<String, String> headers = new HashMap<>();
+            String key;
             while (keys.hasNext()){
-                System.out.println(keys.next());
+                key = keys.next();
+                switch (key) {
+                    case "name":
+                        name = jsonObj.getString("name");
+                        break;
+                    case "method":
+                        method = jsonObj.getString("method");
+                        break;
+                    case "endpoint":
+                        endpoint = jsonObj.getString("endpoint");
+                        break;
+                    case "form parameters":
+                        JSONArray formParams = jsonObj.getJSONArray("form parameters");
+                        for (int num = 0; num < formParams.length(); num++){
+                            JSONObject formObj = formParams.getJSONObject(num);
+                            Iterator<String> formKeys = formObj.keys();
+                            String formKey;
+                            String formKeyVal;
+                            while (formKeys.hasNext()){
+                                formKey = formKeys.next();
+                                formKeyVal = formObj.getString(formKey);
+                                formParameters.put(formKey, formKeyVal);
+                            }
+                        }
+                        break;
+                    case "path parameters":
+                        JSONArray pathParams = jsonObj.getJSONArray("path parameters");
+                        for (int num = 0; num < pathParams.length(); num++){
+                            JSONObject pathObj = pathParams.getJSONObject(num);
+                            Iterator<String> formKeys = pathObj.keys();
+                            String formKey;
+                            String formKeyVal;
+                            while (formKeys.hasNext()){
+                                formKey = formKeys.next();
+                                formKeyVal = pathObj.getString(formKey);
+                                pathParameters.put(formKey, formKeyVal);
+                            }
+                        }
+                        break;
+                    case "headers":
+                        JSONArray headerParams = jsonObj.getJSONArray("headers");
+                        for (int num = 0; num < headerParams.length(); num++){
+                            JSONObject headerObj = headerParams.getJSONObject(num);
+                            Iterator<String> formKeys = headerObj.keys();
+                            String formKey;
+                            String formKeyVal;
+                            while (formKeys.hasNext()){
+                                formKey = formKeys.next();
+                                formKeyVal = headerObj.getString(formKey);
+                                headers.put(formKey, formKeyVal);
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
-            System.out.println();
+            return new Endpoint(endpoint,method,name,headers,formParameters,pathParameters);
         }
     }
 
     class Endpoint {
-        String[] headers;
         String endpoint;
         String method;
         String name;
-        String[] formParameters;
-        String[] pathParameters;
-        String[] queryParameters;
+        HashMap<String, String > formParameters = new HashMap<>();
+        HashMap<String, String > pathParameters = new HashMap<>();
+        HashMap<String, String> headers = new HashMap<>();
 
-        Endpoint(String endpoint, String method, String name, String[] headers, String[] formParameters, String[] pathParameters, String[] queryParameters) {
+        Endpoint(String endpoint, String method, String name, HashMap<String, String > headers, HashMap<String, String > formParameters, HashMap<String, String > pathParameters) {
 
             this.endpoint = endpoint;
             this.method = method;
             this.name = name;
-            if (headers.length != 0) {
-                this.headers = headers;
-            }
-            if (formParameters.length != 0) {
-                this.formParameters = formParameters;
-            }
-            if (pathParameters.length != 0) {
-                this.pathParameters = pathParameters;
-            }
-            if (queryParameters.length != 0) {
-                this.queryParameters = queryParameters;
-            }
+            this.headers = headers;
+            this.formParameters = formParameters;
+            this.pathParameters = pathParameters;
         }
 
         public String getEndpoint() {
@@ -120,20 +145,42 @@ public class Main {
             return name;
         }
 
-        public String[] getHeaders() {
+        public HashMap<String, String> getHeaders() {
             return headers;
         }
 
-        public String[] getFormParameters() {
+        public HashMap<String, String> getFormParameters() {
             return formParameters;
         }
 
-        public String[] getPathParameters() {
+        public HashMap<String, String> getPathParameters() {
             return pathParameters;
         }
-
-        public String[] getQueryParameters() {
-            return queryParameters;
-        }
     }
+
+
+//        ProcessBuilder processBuilder = new ProcessBuilder();
+//
+//        processBuilder.command("sqlmap", "-u", "http://www.bible-history.com/subcat.php?id=2","--dbs");
+//
+//        try {
+//
+//            Process process = processBuilder.start();
+//
+//            BufferedReader readerTwo =
+//                    new BufferedReader(new InputStreamReader(process.getInputStream()));
+//
+//            String line;
+//            while ((line = readerTwo.readLine()) != null) {
+//                System.out.println(line);
+//            }
+//
+//            int exitCode = process.waitFor();
+//            System.out.println("\nExited with error code : " + exitCode);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
