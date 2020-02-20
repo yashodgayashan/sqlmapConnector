@@ -18,7 +18,10 @@ public class Main {
             {
                 Endpoint endpoint = getEndpointElements(jsonArr.getJSONObject(i));
                 System.out.println(endpoint.getName());
-                System.out.println(endpoint.getConstructedEndpoint());
+                if(endpoint.hasFormParameters())
+                {
+                    System.out.println(endpoint.getConstructedFormParams());
+                }
                 System.out.println();
             }
         }
@@ -182,6 +185,7 @@ public class Main {
         }
 
         public boolean hasHeader() {
+
             if (getHeaders().size() > 0) {
                 return true;
             } else {
@@ -190,11 +194,29 @@ public class Main {
         }
 
         public Queue<String> getFormParamsKeys() {
+
             Queue<String> pathParams = new LinkedList<>();
             getFormParameters().forEach((key, value) ->{
                 pathParams.add(key);
             });
             return pathParams;
+        }
+
+        public String getConstructedFormParams() {
+
+            Queue<String> pathParams = new LinkedList<>();
+            String constructedVal = "";
+            getFormParameters().forEach((key, value) ->{
+                pathParams.add(key+"="+value);
+            });
+            while (pathParams.size() > 0){
+                if(pathParams.size() == 1){
+                    constructedVal += pathParams.remove();
+                } else {
+                    constructedVal += pathParams.remove() + "&";
+                }
+            }
+            return constructedVal;
         }
     }
 
