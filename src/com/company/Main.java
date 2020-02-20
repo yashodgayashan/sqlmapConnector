@@ -107,5 +107,33 @@ public class Main {
                 this.queryParameters = queryParameters;
             }
         }
+
+        public String getEndpoint() {
+            return endpoint;
+        }
+
+        public String getMethod() {
+            return method;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String[] getHeaders() {
+            return headers;
+        }
+
+        public String[] getFormParameters() {
+            return formParameters;
+        }
+
+        public String[] getPathParameters() {
+            return pathParameters;
+        }
+
+        public String[] getQueryParameters() {
+            return queryParameters;
+        }
     }
 
