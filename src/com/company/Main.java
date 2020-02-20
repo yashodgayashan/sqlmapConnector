@@ -2,10 +2,7 @@ package com.company;
 
 import java.io.*;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
-
 import org.json.*;
-
 
 public class Main {
 
@@ -18,9 +15,12 @@ public class Main {
             {
                 Endpoint endpoint = getEndpointElements(jsonArr.getJSONObject(i));
                 System.out.println(endpoint.getName());
-                if(endpoint.hasFormParameters())
-                {
+                System.out.println(endpoint.getConstructedEndpoint());
+                if(endpoint.hasFormParameters()){
                     System.out.println(endpoint.getConstructedFormParams());
+                }
+                if (endpoint.hasHeader()){
+                    System.out.println(endpoint.getConstructedHeaderParams());
                 }
                 System.out.println();
             }
@@ -29,7 +29,7 @@ public class Main {
         public static String getFileContent(String fileName) throws IOException {
 
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
-            String data = "";
+            String data;
             try {
                 StringBuilder stringBuilder = new StringBuilder();
                 String line = reader.readLine();
@@ -126,9 +126,9 @@ public class Main {
         String endpoint;
         String method;
         String name;
-        HashMap<String, String > formParameters = new HashMap<>();
-        LinkedHashMap<String, String > pathParameters = new LinkedHashMap<>();
-        HashMap<String, String> headers = new HashMap<>();
+        HashMap<String, String > formParameters;
+        LinkedHashMap<String, String > pathParameters;
+        HashMap<String, String> headers;
 
         Endpoint(String endpoint, String method, String name, HashMap<String, String > headers, HashMap<String, String > formParameters, LinkedHashMap<String, String > pathParameters) {
 
@@ -165,58 +165,58 @@ public class Main {
         }
 
         public String getConstructedEndpoint() {
-            String endString = "";
+            StringBuilder endString = new StringBuilder();
             Queue<String> pathParams = new LinkedList<>();
-            getPathParameters().forEach((key,value)->{
-                pathParams.add(value);
-            });
+            getPathParameters().forEach((key,value)-> pathParams.add(value));
             while (pathParams.size() != 0){
-                endString +="/"+pathParams.remove();
+                endString.append("/").append(pathParams.remove());
             }
             return getEndpoint()+endString;
         }
 
         public boolean hasFormParameters() {
-            if (getFormParameters().size() > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return getFormParameters().size() > 0;
         }
 
         public boolean hasHeader() {
-
-            if (getHeaders().size() > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return getHeaders().size() > 0;
         }
 
         public Queue<String> getFormParamsKeys() {
 
             Queue<String> pathParams = new LinkedList<>();
-            getFormParameters().forEach((key, value) ->{
-                pathParams.add(key);
-            });
+            getFormParameters().forEach((key, value) -> pathParams.add(key));
             return pathParams;
         }
 
         public String getConstructedFormParams() {
 
             Queue<String> pathParams = new LinkedList<>();
-            String constructedVal = "";
-            getFormParameters().forEach((key, value) ->{
-                pathParams.add(key+"="+value);
-            });
+            StringBuilder constructedVal = new StringBuilder();
+            getFormParameters().forEach((key, value) -> pathParams.add(key+"="+value));
             while (pathParams.size() > 0){
                 if(pathParams.size() == 1){
-                    constructedVal += pathParams.remove();
+                    constructedVal.append(pathParams.remove());
                 } else {
-                    constructedVal += pathParams.remove() + "&";
+                    constructedVal.append(pathParams.remove()).append("&");
                 }
             }
-            return constructedVal;
+            return constructedVal.toString();
+        }
+
+        public String getConstructedHeaderParams() {
+
+            Queue<String> pathParams = new LinkedList<>();
+            StringBuilder constructedVal = new StringBuilder();
+            getHeaders().forEach((key, value) -> pathParams.add(key+"="+value));
+            while (pathParams.size() > 0){
+                if(pathParams.size() == 1){
+                    constructedVal.append(pathParams.remove());
+                } else {
+                    constructedVal.append(pathParams.remove()).append("&");
+                }
+            }
+            return constructedVal.toString();
         }
     }
 
