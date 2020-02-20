@@ -69,7 +69,7 @@ public class Main {
 
         public static String getFileContent(String fileName) throws IOException {
 
-            BufferedReader reader = new BufferedReader(new FileReader("text.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));
             String data = "";
             try {
                 StringBuilder stringBuilder = new StringBuilder();
