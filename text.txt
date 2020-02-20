@@ -1,543 +1,631 @@
 [{
 	"name": "aboutus",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/aboutus",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
-		"language_id": "1",
-		"username": "abc",
-		"password": "abc"
+	"path parameters": [{
+		"language_id": "1"
 	}]
 }, {
 	"name": "accept_trip",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/accept_trip",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
+	"path parameters": [{
 		"bookingid": "1",
-		"language_id": "abc",
-		"username": "abc",
-		"password": "abc"
+		"language_id": "abc"
 	}]
 }, {
+	"name": "addvehicle",
+	"method": "POST",
+	"endpoint": "https://staging.muve.lk/driver/v2/addvehicle",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
+	}],
+	"form parameters": [{
+		"vehicle_type": "1",
+		"make": "1",
+		"model": "1",
+		"color": "abc",
+		"license_plate_no": "abc",
+		"safety_number": "abc",
+		"manufactured_year": "abc",
+		"vin_number": "abc",
+		"insurance_expiry": "abc",
+		"authorized": "abc",
+		"vehicle_photo": "abc",
+		"vin_photo": "abc",
+		"insurance_photo": "abc",
+		"safety_expiry": "abc",
+		"safety_photo": "abc",
+		"seating_capacity": "1"
+	}]
+},{
 	"name": "bookings_by_status",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/bookings_by_status",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
-		"pageno": "1",
-		"username": "abc",
-		"password": "abc"
+	"path parameters": [{
+		"pageno": "1"
 	}]
-}, {
-	"name": "check_driver_booking_request",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+},{
+	"name": "cancel_accepted_trip",
+	"method": "POST",
+	"endpoint": "https://staging.muve.lk/driver/v2/cancel_accepted_trip",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
-		"username": "abc",
-		"password": "abc"
+	"form parameters": [{
+		"bookingid": "1",
+		"reason": "abc"
+	}]
+},{
+	"name": "cancel_trip",
+	"method": "POST",
+	"endpoint": "https://staging.muve.lk/driver/v2/cancel_trip",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
+	}],
+	"form parameters": [{
+		"bookingid": "1",
+		"language_id": "1"
+	}]
+},{
+	"name": "changepassword",
+	"method": "POST",
+	"endpoint": "https://staging.muve.lk/driver/v2/changepassword",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
+	}],
+	"form parameters": [{
+		"oldpassword": "abc",
+		"newpassword": "bcd"
+	}]
+},{
+	"name": "check_driver_booking_request",
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/check_driver_booking_request",
+	"security headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}]
 }, {
 	"name": "check_offline_driver_cron",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/check_offline_driver_cron",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}]
 }, {
 	"name": "collectpendingpayments",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/collectpendingpayments",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
+	}]
+}, {
+	"name": "contactus",
+	"method": "POST",
+	"endpoint": "https://staging.muve.lk/driver/v2/contactus",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
-		"email": "abc",
-		"password": "abc"
+	"form parameters": [{
+		"user_id": "1",
+		"user email": "abc",
+		"subject": "abc",
+		"message": "abc"
 	}]
 }, {
 	"name": "cronjobs",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
-	}],
-	"parameters": [{
-		"email": "abc",
-		"password": "abc"
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/cronjobs",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}]
 }, {
 	"name": "cronretryfailedpayments",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
-	}],
-	"parameters": [{
-		"email": "abc",
-		"password": "abc"
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/cronretryfailedpayments",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}]
 }, {
 	"name": "current_week_booking2",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/current_week_booking2",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
-		"days": "1",
-		"username": "abc",
-		"password": "abc"
+	"path parameters": [{
+		"days": "1"
 	}]
 }, {
 	"name": "daypayout",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/daypayout",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
-		"date": "1",
-		"username": "abc",
-		"password": "abc"
+	"path parameters": [{
+		"date": "1"
 	}]
 }, {
 	"name": "driverrunningbooking",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/driverrunningbooking",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
+	}]
+}, {
+	"name": "end_trip2",
+	"method": "POST",
+	"endpoint": "https://staging.muve.lk/driver/v2/end_trip2",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
-		"username": "abc",
-		"password": "abc"
+	"form parameters": [{
+		"bookingid": "1",
+		"distance": "1",
+		"drop_address": "abc",
+		"latitude": "abc",
+		"longitude": "abc",
+		"travel_route": "abc"
 	}]
 }, {
 	"name": "endcall",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/endcall",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
+	"path parameters": [{
 		"twilio_number": "1"
 	}]
 }, {
-	"name": "expireprofilescron",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
-	}]
-}, {
-	"name": "expirevehiclescron",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
-	}]
-}, {
-	"name": "get_bank_details",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"name": "forgotpassword",
+	"method": "POST",
+	"endpoint": "https://staging.muve.lk/driver/v2/forgotpassword",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
-		"username": "abc",
-		"password": "abc"
+	"form parameters": [{
+		"mobileno": "abc"
+	}]
+},  {
+	"name": "get_bank_details",
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/get_bank_details",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}]
 }, {
 	"name": "get_booking_status",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/get_booking_status",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
-		"bookingid": "1",
-		"username": "abc",
-		"password": "abc"
+	"path parameters": [{
+		"bookingid": "1"
 	}]
 }, {
 	"name": "get_driver_detail",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/get_driver_detail",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
-		"language_id": "1",
-		"username": "abc",
-		"password": "abc"
+	"path parameters": [{
+		"language_id": "1"
 	}]
 }, {
 	"name": "getavgrating",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
-	}],
-	"parameters": [{
-		"username": "abc",
-		"password": "abc"
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/getavgrating",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}]
 }, {
 	"name": "gettolls",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/gettolls",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
+	"path parameters": [{
 		"countrycode": "abc",
 		"area": "abc",
 		"lat": "1",
-		"lng": "1",
-		"username": "abc",
-		"password": "abc"
+		"lng": "1"
 	}]
 }, {
 	"name": "getvehicledata",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/getvehicledata",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
-		"vehicleid": "1",
-		"username": "abc",
-		"password": "abc"
+	"path parameters": [{
+		"vehicleid": "1"
 	}]
 }, {
+	"name": "give_rating",
+	"method": "POST",
+	"endpoint": "https://staging.muve.lk/driver/v2/give_rating",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
+	}],
+	"path parameters": [{
+		"booking_id": "1",
+		"rating": "abc"
+	}]
+},{
 	"name": "helpcategories",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/helpcategories",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}]
 }, {
 	"name": "helpdetails",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/helpdetails",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
+	"path parameters": [{
 		"id": "1"
 	}]
 }, {
-	"name": "hotspot_recent",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
-	}],
-	"parameters": [{
-		"lat": "1",
-		"long": "1"
-	}]
-}, {
 	"name": "countries",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/countries",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
-		"languageid": "1",
-		"username": "abc",
-		"password": "abc"
+	"path parameters": [{
+		"languageid": "1"
 	}]
 }, {
 	"name": "logout",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/logout",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
-		"username": "abc",
-		"password": "abc",
+	"form parameters": [{
 		"devcieid": "1"
 	}]
 }, {
 	"name": "makeslist",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/makeslist",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
-		"language_id": "1",
-		"username": "abc",
-		"password": "abc"
+	"path parameters": [{
+		"language_id": "1"
 	}]
 }, {
-	"name": "modelslist",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"name": "message_to_rider",
+	"method": "POST",
+	"endpoint": "https://staging.muve.lk/driver/v2/message_to_rider",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
+	"form parameters": [{
+		"bookingid": "1",
 		"language_id": "1",
-		"makeid": "1",
-		"username": "abc",
-		"password": "abc"
+		"message": "1"
+	}]
+},{
+	"name": "modelslist",
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/modelslist",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
+	}],
+	"path parameters": [{
+		"language_id": "1",
+		"makeid": "1"
 	}]
 }, {
 	"name": "notifications",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
-	}],
-	"parameters": [{
-		"username": "abc",
-		"password": "abc"
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/notifications",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}]
 }, {
 	"name": "onlineoffline",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "POST",
+	"endpoint": "https://staging.muve.lk/driver/v2/onlineoffline",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
+	"form parameters": [{
 		"status": "abc",
 		"carid": "1",
 		"cartypeid": "1",
-		"username": "abc",
-		"password": "abc"
+		"selectedcartypes": "abc"
 	}]
 }, {
 	"name": "payment_void2",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/payment_void2",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}]
 }, {
 	"name": "payout",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/payout",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
+	"path parameters": [{
 		"from_date": "1",
 		"to_date": "2",
-		"utc_offset": "1",
-		"username": "abc",
-		"password": "abc"
+		"utc_offset": "1"
 	}]
 }, {
 	"name": "precheckonline",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/precheckonline",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
-		"vehicleid": "1",
-		"username": "abc",
-		"password": "abc"
+	"form parameters": [{
+		"vehicleid": "1"
 	}]
 }, {
 	"name": "profiledocs",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/profiledocs",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
-		"userid": "1",
-		"username": "abc",
-		"password": "abc"
+	"path parameters": [{
+		"userid": "1"
 	}]
 }, {
 	"name": "promotions",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/promotions",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
 	"parameters": [{
 		"promotiontype": "abc"
 	}]
 }, {
 	"name": "pusherweb",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/pusherweb",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}]
 }, {
 	"name": "referral/driver/breakdown/earnings",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/referral/driver/breakdown/earnings",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
-		"username": "abc",
-		"password": "abc",
-		"fromdate": "1",
-		"todate": "2"
+	"form parameters": [{
+		"fromdate": "abc",
+		"todate": "bcd"
 	}]
 }, {
 	"name": "referral/driver/summary",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
-	}],
-	"parameters": [{
-		"username": "abc",
-		"password": "abc"
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/referral/driver/summary",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}]
 }, {
 	"name": "send_ongoing_notification",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/send_ongoing_notification",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
+	"path parameters": [{
 		"booking_id": "1",
 		"time": "abc"
 	}]
 }, {
-	"name": "send_ongoing_notification",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
-	}],
-	"parameters": [{
-		"booking_id": "1",
-		"time": "1",
-		"username": "abc",
-		"password": "abc"
-	}]
-}, {
-	"name": "send_sos_message",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
-	}],
-	"parameters": [{
-		"booking_id": "1",
-		"username": "abc",
-		"password": "abc"
-	}]
-}, {
 	"name": "sms_offline_driver_cron",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/sms_offline_driver_cron",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}]
 }, {
 	"name": "suburblist",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/suburblist",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
 	"parameters": [{
-		"countryid": "1",
-		"username": "abc",
-		"password": "abc"
+		"countryid": "1"
 	}]
 }, {
 	"name": "summary_detail",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/summary_detail",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
-		"bookingid": "1",
-		"username": "abc",
-		"password": "abc"
+	"path parameters": [{
+		"bookingid": "1"
 	}]
 }, {
 	"name": "terms_conditions",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/terms_conditions",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
-		"language_id": "1",
-		"username": "abc",
-		"password": "abc"
+	"path parameters": [{
+		"language_id": "1"
 	}]
 }, {
 	"name": "test_comment_mail",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/test_comment_mail",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
+	"path parameters": [{
 		"bookingid": "1"
 	}]
 }, {
 	"name": "testpayout",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/testpayout",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
+	}]
+}, {
+	"name": "update_selectedcartypes",
+	"method": "POST",
+	"endpoint": "https://staging.muve.lk/driver/v2/update_selectedcartypes",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
+	}],
+	"form parameters": [{
+		"carid": "1",
+		"selectedcartypes": "abc"
+	}]
+}, {
+	"name": "updatebankdetails",
+	"method": "POST",
+	"endpoint": "https://staging.muve.lk/driver/v2/updateonlinedriver",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
+	}],
+	"form parameters": [{
+		"account_name": "1",
+		"bank_name": "abc",
+		"bsb_no": "abc",
+		"bank_account_no": "abc"
+	}]
+}, {
+	"name": "updatedriverlocation",
+	"method": "POST",
+	"endpoint": "https://staging.muve.lk/driver/v2/updatedriverlocation",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
+	}],
+	"form parameters": [{
+		"latitude": "abc",
+		"longitude": "abc",
+		"language_id": "1"
 	}]
 }, {
 	"name": "updateonlinedriver",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/updateonlinedriver",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
-		"username": "abc",
-		"password": "abc",
+	"form parameters": [{
 		"latitude": "abc",
 		"longitude": "abc"
 	}]
-}, {
-	"name": "vehicledetails",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+},{
+	"name": "updateprofile",
+	"method": "POST",
+	"endpoint": "https://staging.muve.lk/driver/v2/updateprofile",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
-		"vehicleid": "1",
-		"username": "abc",
-		"password": "abc"
+	"form parameters": [{
+		"firstname": "abc",
+		"email": "abc",
+		"country": "1",
+		"country_code": "abc"
+	}]
+},{
+	"name": "updateprofiledocs",
+	"method": "POST",
+	"endpoint": "https://staging.muve.lk/driver/v2/updateprofiledocs",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
+	}],
+	"form parameters": [{
+		"clearance_number": "abc",
+		"obtained_date": "abc",
+		"valid_till": "abc",
+		"identification_number": "abc",
+		"license_no": "abc",
+		"expiry_date": "abc",
+		"license_type": "abc"
+	}]
+},{
+	"name": "updatevehicle",
+	"method": "POST",
+	"endpoint": "https://staging.muve.lk/driver/v2/updatevehicle",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
+	}],
+	"form parameters": [{
+		"vehicle_id": "1",
+		"vehicle_type": "1",
+		"make": "1",
+		"model": "1",
+		"color": "abc",
+		"license_plate_no": "abc",
+		"safety_number": "abc",
+		"manufactured_year": "abc",
+		"vin_number": "abc",
+		"insurance_expiry": "abc",
+		"authorized": "abc",
+		"vehicle_photo": "abc",
+		"vin_photo": "abc",
+		"insurance_photo": "abc",
+		"safety_expiry": "abc",
+		"safety_photo": "abc",
+		"seating_capacity": "1"
+	}]
+},{
+	"name": "vehicledetails",
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/vehicledetails",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
+	}],
+	"path parameters": [{
+		"vehicleid": "1"
 	}]
 }, {
 	"name": "vehiclelist",
-	"endpoint": "https://staging.muve.lk/driver/v2",
-	"request format": "get",
-	"security headers": [{
-		"Auth": "Basic bmF2b2RhMTA4QGdtYWlsLmNvbTphc2Q ="
+	"method": "GET",
+	"endpoint": "https://staging.muve.lk/driver/v2/vehiclelist",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}],
-	"parameters": [{
-		"language_id": "1",
-		"username": "abc",
-		"password": "abc"
+	"path parameters": [{
+		"language_id": "1"
+	}]
+}, {
+	"name": "verifyotp",
+	"method": "POST",
+	"endpoint": "https://staging.muve.lk/driver/v2/verifyotp",
+	"headers": [{
+		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
+	}],
+	"form parameters": [{
+		"mobileno": "abc",
+		"type": "abc",
+		"otp": "abc"
 	}]
 }]
-

