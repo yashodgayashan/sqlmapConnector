@@ -2,10 +2,7 @@ package com.company;
 
 import java.io.*;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
-
 import org.json.*;
-
 
 public class Main {
 
@@ -18,9 +15,11 @@ public class Main {
             {
                 Endpoint endpoint = getEndpointElements(jsonArr.getJSONObject(i));
                 System.out.println(endpoint.getName());
-                if(endpoint.hasFormParameters())
-                {
+                if(endpoint.hasFormParameters()){
                     System.out.println(endpoint.getConstructedFormParams());
+                }
+                if (endpoint.hasHeader()){
+                    System.out.println(endpoint.getConstructedHeaderParams());
                 }
                 System.out.println();
             }
@@ -207,6 +206,23 @@ public class Main {
             Queue<String> pathParams = new LinkedList<>();
             String constructedVal = "";
             getFormParameters().forEach((key, value) ->{
+                pathParams.add(key+"="+value);
+            });
+            while (pathParams.size() > 0){
+                if(pathParams.size() == 1){
+                    constructedVal += pathParams.remove();
+                } else {
+                    constructedVal += pathParams.remove() + "&";
+                }
+            }
+            return constructedVal;
+        }
+
+        public String getConstructedHeaderParams() {
+
+            Queue<String> pathParams = new LinkedList<>();
+            String constructedVal = "";
+            getHeaders().forEach((key, value) ->{
                 pathParams.add(key+"="+value);
             });
             while (pathParams.size() > 0){
