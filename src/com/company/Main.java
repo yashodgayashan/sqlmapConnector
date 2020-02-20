@@ -162,15 +162,16 @@ public class Main {
         }
 
         public String getConstructedEndpoint() {
-            String endString = "Hi";
-            LinkedList<String> pathParams = new LinkedList<String>();
+            String endString = "";
+            Queue<String> pathParams = new LinkedList<>();
             getPathParameters().forEach((key,value)->{
                 pathParams.add(value);
             });
-            System.out.println(pathParams.size());
-            return endString;
+            while (pathParams.size() != 0){
+                endString +="/"+pathParams.remove();
+            }
+            return getEndpoint()+endString;
         }
-
     }
 
 
