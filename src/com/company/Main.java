@@ -2,6 +2,8 @@ package com.company;
 
 import java.io.*;
 import java.util.Iterator;
+import java.util.Set;
+
 import org.json.*;
 
 
@@ -14,30 +16,9 @@ public class Main {
 
             for (int i = 0; i < jsonArr.length(); i++)
             {
-                JSONObject jsonObj = jsonArr.getJSONObject(i);
-                String name = jsonObj.getString("name");
-                String endpoint = jsonObj.getString("endpoint");
-                JSONArray parameters;
-                try{
-                    parameters = jsonObj.getJSONArray("parameters");
-                    for (int j = 0; j < parameters.length();j++){
-                        JSONObject jsonObjTwo = parameters.getJSONObject(j);
-                        Iterator<String> keys = jsonObjTwo.keys();
-                        while (keys.hasNext()) {
-                            String key = keys.next();
-                            System.out.print(key + " ");
-                            System.out.println(jsonObjTwo.getString(key));
-                        }
-                    }
-                }catch (Exception e){
+                constructURLElements(jsonArr.getJSONObject(i));
 
-                }
-
-                System.out.println(endpoint+"/"+name+"?");
-                System.out.println();
-//
             }
-//
 //
 //        ProcessBuilder processBuilder = new ProcessBuilder();
 //
@@ -90,5 +71,41 @@ public class Main {
             return new JSONArray(data);
         }
 
+        public static void constructURLElements(JSONObject jsonObj){
+            Iterator<String> keys = jsonObj.keys();
+            while (keys.hasNext()){
+                System.out.println(keys.next());
+            }
+            System.out.println();
+        }
+    }
+
+    class Endpoint {
+        String[] headers;
+        String endpoint;
+        String method;
+        String name;
+        String[] formParameters;
+        String[] pathParameters;
+        String[] queryParameters;
+
+        Endpoint(String endpoint, String method, String name, String[] headers, String[] formParameters, String[] pathParameters, String[] queryParameters) {
+
+            this.endpoint = endpoint;
+            this.method = method;
+            this.name = name;
+            if (headers.length != 0) {
+                this.headers = headers;
+            }
+            if (formParameters.length != 0) {
+                this.formParameters = formParameters;
+            }
+            if (pathParameters.length != 0) {
+                this.pathParameters = pathParameters;
+            }
+            if (queryParameters.length != 0) {
+                this.queryParameters = queryParameters;
+            }
+        }
     }
 
