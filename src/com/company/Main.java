@@ -14,25 +14,101 @@ public class Main {
 
             for (int i = 0; i < jsonArr.length(); i++)
             {
+                LinkedList<SQLMapData> report = new LinkedList<>();
+                SQLMapData data ;
+                ProcessBuilder processBuilder = new ProcessBuilder();
+
                 Endpoint endpoint = getEndpointElements(jsonArr.getJSONObject(i));
+
                 String endPoint = endpoint.getConstructedEndpoint();
                 String endPointName = endpoint.getName();
                 String method = endpoint.getMethod();
+                System.out.println(endPoint );
                 if(endpoint.hasFormParameters()){
                     Queue<String> formVars = endpoint.getFormParamsKeys();
                     if(endpoint.hasHeader()){
-
+                        while(formVars.size()>0){
+                            String formVal = formVars.remove();
+                            processBuilder.command(
+                                    "sqlmap",
+                                    "-u",
+                                    endPoint,
+                                    "--method",
+                                    method,
+                                    endpoint.getConstructedHeaderParams(),
+                                    endpoint.getConstructedFormParams(),
+                                    "-p",
+                                    formVal,
+                                    "--dbs");
+                            data = getSQLMapDetails(processBuilder);
+                            report.add(data);
+                        }
                     }else{
-
+                        while(formVars.size()>0){
+                            String formVal = formVars.remove();
+                            processBuilder.command(
+                                    "sqlmap",
+                                    "-u",
+                                    endPoint,
+                                    "--method",
+                                    method,
+                                    endpoint.getConstructedHeaderParams(),
+                                    endpoint.getConstructedFormParams(),
+                                    "-p",
+                                    formVal,
+                                    "--dbs");
+                        }
+                        data = getSQLMapDetails(processBuilder);
+                        report.add(data);
                     }
                 } else {
                     if(endpoint.hasHeader()){
-
+                        processBuilder.command(
+                                "sqlmap",
+                                "-u",
+                                endPoint,
+                                "--method",
+                                method,
+                                endpoint.getConstructedHeaderParams(),
+                                "--dbs");
                     }else{
-
+                        processBuilder.command(
+                                "sqlmap",
+                                "-u",
+                                endPoint,
+                                "--method",
+                                method,
+                                "--dbs");
                     }
+                    data = getSQLMapDetails(processBuilder);
+                    report.add(data);
                 }
             }
+        }
+
+        public static SQLMapData getSQLMapDetails(ProcessBuilder processBuilder) {
+            SQLMapData sqlMapData = null;
+            try {
+
+                Process process = processBuilder.start();
+
+                BufferedReader readerTwo =
+                        new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+                String line;
+                while ((line = readerTwo.readLine()) != null) {
+                    System.out.println(line);
+                }
+
+                int exitCode = process.waitFor();
+                System.out.println("\nExited with error code : " + exitCode);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return sqlMapData;
         }
 
         public static String getFileContent(String fileName) throws IOException {
@@ -210,6 +286,7 @@ public class Main {
                     constructedVal.append(pathParams.remove()).append("&");
                 }
             }
+            constructedVal = new StringBuilder("--data=\"" + constructedVal + "\"");
             return constructedVal.toString();
         }
 
@@ -217,7 +294,7 @@ public class Main {
 
             Queue<String> pathParams = new LinkedList<>();
             StringBuilder constructedVal = new StringBuilder();
-            getHeaders().forEach((key, value) -> pathParams.add(key+"="+value));
+            getHeaders().forEach((key, value) -> pathParams.add(key+":"+value));
             while (pathParams.size() > 0){
                 if(pathParams.size() == 1){
                     constructedVal.append(pathParams.remove());
@@ -225,6 +302,7 @@ public class Main {
                     constructedVal.append(pathParams.remove()).append("&");
                 }
             }
+            constructedVal = new StringBuilder("--headers=\"" + constructedVal + "\"");
             return constructedVal.toString();
         }
     }
@@ -261,29 +339,3 @@ public class Main {
             return formParam != null;
         }
     }
-
-//        ProcessBuilder processBuilder = new ProcessBuilder();
-//
-//        processBuilder.command("sqlmap", "-u", "http://www.bible-history.com/subcat.php?id=2","--dbs");
-//
-//        try {
-//
-//            Process process = processBuilder.start();
-//
-//            BufferedReader readerTwo =
-//                    new BufferedReader(new InputStreamReader(process.getInputStream()));
-//
-//            String line;
-//            while ((line = readerTwo.readLine()) != null) {
-//                System.out.println(line);
-//            }
-//
-//            int exitCode = process.waitFor();
-//            System.out.println("\nExited with error code : " + exitCode);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-
