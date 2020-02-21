@@ -91,7 +91,7 @@
 	"name": "check_driver_booking_request",
 	"method": "GET",
 	"endpoint": "https://staging.muve.lk/driver/v2/check_driver_booking_request",
-	"security headers": [{
+	"headers": [{
 		"Authorization": "Basic MDc3NDc2NjE2NDpzdDU="
 	}]
 }, {
