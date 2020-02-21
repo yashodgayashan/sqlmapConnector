@@ -6,23 +6,34 @@ import org.json.*;
 
 public class Main {
 
+
         public static void main(String[] args) throws IOException {
 
             String fileData = getFileContent("text.txt");
             JSONArray jsonArr = convertToJsonArray(fileData);
 
+            LinkedHashMap<String, String > endPoingDetails = new LinkedHashMap<>();
             for (int i = 0; i < jsonArr.length(); i++)
             {
                 Endpoint endpoint = getEndpointElements(jsonArr.getJSONObject(i));
-                System.out.println(endpoint.getName());
-                System.out.println(endpoint.getConstructedEndpoint());
+
+                String endPoint = endpoint.getConstructedEndpoint();
+                String endPointName = endpoint.getName();
+                String method = endpoint.getMethod();
                 if(endpoint.hasFormParameters()){
-                    System.out.println(endpoint.getConstructedFormParams());
+                    Queue<String> formVars = endpoint.getFormParamsKeys();
+                    if(endpoint.hasHeader()){
+
+                    }else{
+
+                    }
+                } else {
+                    if(endpoint.hasHeader()){
+
+                    }else{
+
+                    }
                 }
-                if (endpoint.hasHeader()){
-                    System.out.println(endpoint.getConstructedHeaderParams());
-                }
-                System.out.println();
             }
         }
 
