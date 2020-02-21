@@ -2,28 +2,30 @@ package com.company;
 
 import java.io.*;
 import java.util.*;
+
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.json.*;
 
 public class Main {
-
 
         public static void main(String[] args) throws IOException {
 
             String fileData = getFileContent("text.txt");
             JSONArray jsonArr = convertToJsonArray(fileData);
+            LinkedList<SQLMapData> report = new LinkedList<>();
 
             for (int i = 0; i < jsonArr.length(); i++)
             {
-                LinkedList<SQLMapData> report = new LinkedList<>();
                 SQLMapData data ;
                 ProcessBuilder processBuilder = new ProcessBuilder();
 
                 Endpoint endpoint = getEndpointElements(jsonArr.getJSONObject(i));
 
                 String endPoint = endpoint.getConstructedEndpoint();
-                String endPointName = endpoint.getName();
+                String endPointName = endpoint.getEndpoint();
                 String method = endpoint.getMethod();
-                System.out.println(endPoint );
+                System.out.println("Endpoint : " + endPoint);
                 if(endpoint.hasFormParameters()){
                     Queue<String> formVars = endpoint.getFormParamsKeys();
                     if(endpoint.hasHeader()){
@@ -40,7 +42,7 @@ public class Main {
                                     "-p",
                                     formVal,
                                     "--dbs");
-                            data = getSQLMapDetails(processBuilder);
+                            data = getSQLMapDetailsWithForm(processBuilder,endPointName,formVal);
                             report.add(data);
                         }
                     }else{
@@ -57,9 +59,9 @@ public class Main {
                                     "-p",
                                     formVal,
                                     "--dbs");
+                            data = getSQLMapDetailsWithForm(processBuilder,endPointName,formVal);
+                            report.add(data);
                         }
-                        data = getSQLMapDetails(processBuilder);
-                        report.add(data);
                     }
                 } else {
                     if(endpoint.hasHeader()){
@@ -80,34 +82,68 @@ public class Main {
                                 method,
                                 "--dbs");
                     }
-                    data = getSQLMapDetails(processBuilder);
+                    data = getSQLMapDetails(processBuilder,endPointName);
                     report.add(data);
                 }
             }
+            while (report.size()>0){
+                SQLMapData data = report.pop();
+                System.out.println(data.getName());
+                if(data.hasFormParam()){
+                    System.out.println(data.getFormParam());
+                }
+                System.out.println(data.getValidity());
+            }
         }
 
-        public static SQLMapData getSQLMapDetails(ProcessBuilder processBuilder) {
-            SQLMapData sqlMapData = null;
+        @NotNull
+        public static String getSQLMapValidity(@NotNull ProcessBuilder processBuilder) {
+
+            int status = 0;
             try {
-
                 Process process = processBuilder.start();
-
                 BufferedReader readerTwo =
                         new BufferedReader(new InputStreamReader(process.getInputStream()));
-
                 String line;
                 while ((line = readerTwo.readLine()) != null) {
-                    System.out.println(line);
+                    System.out.print(".");
+                    if(line.contains("all tested parameters do not appear to be injectable")){
+                        status = 1;
+                    } else if (line.contains("fetching all databases")){
+                        status = 2;
+                    }
                 }
-
                 int exitCode = process.waitFor();
-                System.out.println("\nExited with error code : " + exitCode);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
+            } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
+            System.out.println();
+            if(status == 1){
+                return "Not vulnarable";
+            } else if (status == 2){
+                return "Vulnarable";
+            } else {
+                return "Error with sqlmap querry";
+            }
+        }
+
+        @NotNull
+        public static SQLMapData getSQLMapDetailsWithForm(ProcessBuilder processBuilder, String endPointName, String formParam){
+            SQLMapData sqlMapData;
+            System.out.print("Checking for " + formParam + " parameter -> ");
+            String vulnerability = getSQLMapValidity(processBuilder);
+            System.out.println("Compleded");
+            sqlMapData = new SQLMapData(endPointName,formParam,vulnerability);
+            return sqlMapData;
+        }
+
+        @NotNull
+        public static SQLMapData getSQLMapDetails(ProcessBuilder processBuilder, String endPointName){
+            SQLMapData sqlMapData;
+            System.out.print("Checking -> ");
+            String vulnerability = getSQLMapValidity(processBuilder);
+            System.out.println("Compleded");
+            sqlMapData = new SQLMapData(endPointName,vulnerability);
             return sqlMapData;
         }
 
@@ -131,11 +167,15 @@ public class Main {
             return data;
         }
 
+        @NotNull
+        @Contract("_ -> new")
         public static JSONArray convertToJsonArray(String data) {
             return new JSONArray(data);
         }
 
-        public static Endpoint getEndpointElements(JSONObject jsonObj){
+        @NotNull
+        @Contract("_ -> new")
+        public static Endpoint getEndpointElements(@NotNull JSONObject jsonObj){
 
             Iterator<String> keys = jsonObj.keys();
             String endpoint = null;
