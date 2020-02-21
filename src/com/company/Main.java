@@ -12,11 +12,9 @@ public class Main {
             String fileData = getFileContent("text.txt");
             JSONArray jsonArr = convertToJsonArray(fileData);
 
-            LinkedHashMap<String, String > endPoingDetails = new LinkedHashMap<>();
             for (int i = 0; i < jsonArr.length(); i++)
             {
                 Endpoint endpoint = getEndpointElements(jsonArr.getJSONObject(i));
-
                 String endPoint = endpoint.getConstructedEndpoint();
                 String endPointName = endpoint.getName();
                 String method = endpoint.getMethod();
@@ -231,6 +229,38 @@ public class Main {
         }
     }
 
+    class SQLMapData{
+        private String name;
+        private String formParam;
+        private String validity;
+
+        SQLMapData(String name, String validity){
+            this.name = name;
+            this.validity = validity;
+        }
+
+        SQLMapData(String name, String formParam, String validity){
+            this.name = name;
+            this. formParam = formParam;
+            this.validity = validity;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getValidity() {
+            return validity;
+        }
+
+        public String getFormParam() {
+            return formParam;
+        }
+
+        public boolean hasFormParam() {
+            return formParam != null;
+        }
+    }
 
 //        ProcessBuilder processBuilder = new ProcessBuilder();
 //
