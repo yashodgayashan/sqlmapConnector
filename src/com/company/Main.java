@@ -24,6 +24,7 @@ public class Main {
         for (int i = 0; i < jsonArr.length(); i++) {
             SQLMapData data;
             ProcessBuilder processBuilder = new ProcessBuilder();
+            processBuilder.redirectInput(new File("input.txt"));
             Endpoint endpoint = getEndpointElements(jsonArr.getJSONObject(i));
 
             String endPoint = endpoint.getConstructedEndpoint();
