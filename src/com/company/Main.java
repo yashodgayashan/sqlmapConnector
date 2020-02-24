@@ -24,7 +24,6 @@ public class Main {
         for (int i = 0; i < jsonArr.length(); i++) {
             SQLMapData data;
             ProcessBuilder processBuilder = new ProcessBuilder();
-
             Endpoint endpoint = getEndpointElements(jsonArr.getJSONObject(i));
 
             String endPoint = endpoint.getConstructedEndpoint();
@@ -120,7 +119,7 @@ public class Main {
             Process process = processBuilder.start();
             BufferedReader readerTwo =
                     new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line;
+            String line = "";
             while ((line = readerTwo.readLine()) != null) {
                 System.out.print(".");
                 if (line.contains("all tested parameters do not appear to be injectable")) {
