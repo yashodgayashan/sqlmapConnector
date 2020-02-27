@@ -36,6 +36,7 @@ public class Main {
                 if (endpoint.hasHeader()) {
                     while (formVars.size() > 0) {
                         String formVal = formVars.remove();
+                        System.out.println( "sqlmap "+ "-u "+ endPoint+" --method "+method +" "+ endpoint.getConstructedHeaderParams() + " "+ endpoint.getConstructedFormParams() + " -p " +formVal +" --dbs");
                         processBuilder.command(
                                 "sqlmap",
                                 "-u",
@@ -91,25 +92,40 @@ public class Main {
                 report.add(data);
             }
         }
+        printData(report);
+    }
+
+    public static void printData(@NotNull LinkedList<SQLMapData> data) throws IOException {
+        PrintWriter pw = new PrintWriter(new FileWriter("out.csv"));
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println(ANSI_RED + "                                                            REPORT SUMMARY " + ANSI_RESET);
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
-        while (report.size() > 0) {
-            SQLMapData data = report.pop();
-            System.out.print(data.getName() + " ");
-            if (data.hasFormParam()) {
-                System.out.print(data.getFormParam() + " ");
+        pw.write("REPORT SUMMARY  \n");
+        pw.write("API Name, Form parameter if any, vulnarability \n");
+        while (data.size() > 0) {
+            SQLMapData entry = data.pop();
+            System.out.print(entry.getName() + " ");
+            pw.write(entry.getName() + ",");
+            if (entry.hasFormParam()) {
+                System.out.print(entry.getFormParam() + " ");
+                pw.write(entry.getFormParam() + ",");
+            }else{
+                pw.write(" ,");
             }
-            String validity = data.getValidity();
+            String validity = entry.getValidity();
             if (validity.equals("Not vulnarable")) {
                 System.out.println(ANSI_GREEN + "Not vulnarable!" + ANSI_RESET);
+                pw.write("Not vulnarable \n");
             } else if (validity.equals("Vulnarable")) {
                 System.out.println(ANSI_RED + "Vulnarable!" + ANSI_RESET);
+                pw.write("Vulnarable \n");
             } else {
                 System.out.println(ANSI_YELLOW + "Error with sqlmap querry!" + ANSI_RESET);
+                pw.write("Error with sqlmap querry! \n");
             }
             System.out.println();
         }
+        pw.close();
     }
 
     @NotNull
@@ -122,7 +138,7 @@ public class Main {
                     new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line = "";
             while ((line = readerTwo.readLine()) != null) {
-                System.out.print(".");
+                System.out.println(line);
                 if (line.contains("all tested parameters do not appear to be injectable")) {
                     status = 1;
                 } else if (line.contains("fetching all databases")) {
