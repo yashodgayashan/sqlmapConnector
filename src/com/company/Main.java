@@ -91,16 +91,21 @@ public class Main {
                 report.add(data);
             }
         }
+        printData(report);
+    }
+
+    public static void printData(@NotNull LinkedList<SQLMapData> data) throws IOException {
+        PrintWriter pw = new PrintWriter(new FileWriter("out.csv"));
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println(ANSI_RED + "                                                            REPORT SUMMARY " + ANSI_RESET);
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
-        while (report.size() > 0) {
-            SQLMapData data = report.pop();
-            System.out.print(data.getName() + " ");
-            if (data.hasFormParam()) {
-                System.out.print(data.getFormParam() + " ");
+        while (data.size() > 0) {
+            SQLMapData entry = data.pop();
+            System.out.print(entry.getName() + " ");
+            if (entry.hasFormParam()) {
+                System.out.print(entry.getFormParam() + " ");
             }
-            String validity = data.getValidity();
+            String validity = entry.getValidity();
             if (validity.equals("Not vulnarable")) {
                 System.out.println(ANSI_GREEN + "Not vulnarable!" + ANSI_RESET);
             } else if (validity.equals("Vulnarable")) {
@@ -110,6 +115,7 @@ public class Main {
             }
             System.out.println();
         }
+        pw.close();
     }
 
     @NotNull
@@ -122,7 +128,7 @@ public class Main {
                     new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line = "";
             while ((line = readerTwo.readLine()) != null) {
-                System.out.print(".");
+                System.out.println(line);
                 if (line.contains("all tested parameters do not appear to be injectable")) {
                     status = 1;
                 } else if (line.contains("fetching all databases")) {
