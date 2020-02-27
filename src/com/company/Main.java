@@ -99,19 +99,28 @@ public class Main {
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println(ANSI_RED + "                                                            REPORT SUMMARY " + ANSI_RESET);
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
+        pw.write("REPORT SUMMARY  \n");
+        pw.write("API Name, Form parameter if any, vulnarability \n");
         while (data.size() > 0) {
             SQLMapData entry = data.pop();
             System.out.print(entry.getName() + " ");
+            pw.write(entry.getName() + ",");
             if (entry.hasFormParam()) {
                 System.out.print(entry.getFormParam() + " ");
+                pw.write(entry.getFormParam() + ",");
+            }else{
+                pw.write(" ,");
             }
             String validity = entry.getValidity();
             if (validity.equals("Not vulnarable")) {
                 System.out.println(ANSI_GREEN + "Not vulnarable!" + ANSI_RESET);
+                pw.write("Not vulnarable");
             } else if (validity.equals("Vulnarable")) {
                 System.out.println(ANSI_RED + "Vulnarable!" + ANSI_RESET);
+                pw.write("Vulnarable");
             } else {
                 System.out.println(ANSI_YELLOW + "Error with sqlmap querry!" + ANSI_RESET);
+                pw.write("Error with sqlmap querry!");
             }
             System.out.println();
         }
