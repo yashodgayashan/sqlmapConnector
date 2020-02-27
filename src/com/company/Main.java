@@ -36,6 +36,7 @@ public class Main {
                 if (endpoint.hasHeader()) {
                     while (formVars.size() > 0) {
                         String formVal = formVars.remove();
+                        System.out.println( "sqlmap "+ "-u "+ endPoint+" --method "+method +" "+ endpoint.getConstructedHeaderParams() + " "+ endpoint.getConstructedFormParams() + " -p " +formVal +" --dbs");
                         processBuilder.command(
                                 "sqlmap",
                                 "-u",
@@ -114,13 +115,13 @@ public class Main {
             String validity = entry.getValidity();
             if (validity.equals("Not vulnarable")) {
                 System.out.println(ANSI_GREEN + "Not vulnarable!" + ANSI_RESET);
-                pw.write("Not vulnarable");
+                pw.write("Not vulnarable \n");
             } else if (validity.equals("Vulnarable")) {
                 System.out.println(ANSI_RED + "Vulnarable!" + ANSI_RESET);
-                pw.write("Vulnarable");
+                pw.write("Vulnarable \n");
             } else {
                 System.out.println(ANSI_YELLOW + "Error with sqlmap querry!" + ANSI_RESET);
-                pw.write("Error with sqlmap querry!");
+                pw.write("Error with sqlmap querry! \n");
             }
             System.out.println();
         }
